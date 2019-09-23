@@ -13,15 +13,8 @@ const session    = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const flash      = require("connect-flash");
     
-
-mongoose
-  .connect('mongodb://localhost/neverbored', {useNewUrlParser: true})
-  .then(x => {
-    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
-  })
-  .catch(err => {
-    console.error('Error connecting to mongo', err)
-  });
+require("./configs/dbconnection");
+// require('./helpers/checkRole');
 
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
@@ -58,15 +51,17 @@ hbs.registerHelper('ifUndefined', (value, options) => {
       return options.fn(this);
   }
 });
-  
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
-
+app.locals.title = 'Makeapplan';
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
 
 // Enable authentication using session + passport
 app.use(session({
-  secret: 'irongenerator',
+  secret: 'makeapplan',
   resave: true,
   saveUninitialized: true,
   store: new MongoStore( { mongooseConnection: mongoose.connection })
@@ -77,9 +72,5 @@ require('./passport')(app);
 
 const index = require('./routes/index');
 app.use('/', index);
-
-const authRoutes = require('./routes/auth');
-app.use('/auth', authRoutes);
-      
 
 module.exports = app;
