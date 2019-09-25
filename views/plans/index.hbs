@@ -2,59 +2,100 @@
 
 <form>
   <div class="form-group">
-    <input type="radio" name="type" value="education" checked />
+    <input type="radio" name="type" class="radio education" value="education" />
     <label for="education">Education</label>
 
-    <input type="radio" name="type" value="recreational" />
+    <input type="radio" name="type" class="radio recreational" value="recreational" />
     <label for="recreational">Recreational</label>
 
-    <input type="radio" name="type" value="social" />
+    <input type="radio" name="type" class="radio social" value="social" />
     <label for="social">Social</label>
 
-    <input type="radio" name="type" value="diy" />
+    <input type="radio" name="type" class="radio diy" value="diy" />
     <label for="diy">DIY</label>
 
-    <input type="radio" name="type" value="charity" />
+    <input type="radio" name="type" class="radio charity" value="charity" />
     <label for="charity">Charity</label>
 
-    <input type="radio" name="type" value="cooking" />
+    <input type="radio" name="type" class="radio cooking" value="cooking" />
     <label for="cooking">Cooking</label>
 
-    <input type="radio" name="type" value="relaxation" />
+    <input type="radio" name="type" class="radio relaxation" value="relaxation" />
     <label for="relaxation">Relaxation</label>
 
-    <input type="radio" name="type" value="music" />
+    <input type="radio" name="type" class="radio music" value="music" />
     <label for="music">Music</label>
 
-    <input type="radio" name="type" value="busywork" />
+    <input type="radio" name="type" class="radio busywork" value="busywork" />
     <label for="busywork">Busywork</label>
   </div>
 
-  <div class="form-group">
+  {{!-- <div class="form-group">
     <label for="accessibility">Accessibility</label>
     <input id="accessibility" type="range" min="0.0" max="0.8" step="0.4" value="0" name="accessibility">
-  </div>
+  </div> --}}
 
   <div class="form-group">
+    <label for="accessibility">Accessibility</label>
+    <select name="accessibility" id="accessibility" class="accessibilityAvailable">
+      <option value="0">0</option>
+      <option value="0.02">0.02</option>
+      <option value="0.05">0.05</option>
+      <option value="0.07">0.07</option>
+      <option value="0.08">0.08</option>
+      <option value="0.1">0.1</option>
+      <option value="0.12">0.12</option>
+      <option value="0.15">0.15</option>
+      <option value="0.2">0.2</option>
+      <option value="0.25">0.25</option>
+      <option value="0.3">0.3</option>
+      <option value="0.32">0.32</option>
+      <option value="0.35">0.35</option>
+      <option value="0.4">0.4</option>
+      <option value="0.5">0.5</option>
+      <option value="0.6">0.6</option>
+      <option value="0.7">0.7</option>
+      <option value="0.8">0.8</option>
+      <option value="0.9">0.9</option>
+      <option value="1">1</option>
+    </select>
+  </div>
+
+  {{!-- <div class="form-group">
     <label for="participants">Participants</label>
-    {{!-- <input id="participants" type="range" min="1" max="8" step="1" value="0" name="participants"> --}}
 
-    <select name="participants" id="available">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
+    <select name="participants" id="participants" class="participantsAvailable">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
       </select>
-  </div>
+  </div> --}}
 
-  <div class="form-group">
-    <label for="price">Price</label>
-    <input id="price" type="range" min="0.0" max="0.6" step="0.3" value="0" name="price">
-  </div>
+{{!-- <div class="form-group">
+  <label for="price">Price</label>
+
+  <select name="prices" id="price" class="pricesAvailable">
+    <option value="0">0</option>
+    <option value="0.02">0.02</option>
+    <option value="0.05">0.05</option>
+    <option value="0.08">0.08</option>
+    <option value="0.1">0.1</option>
+    <option value="0.15">0.15</option>
+    <option value="0.2">0.2</option>
+    <option value="0.25">0.25</option>
+    <option value="0.3">0.3</option>
+    <option value="0.4">0.4</option>
+    <option value="0.5">0.5</option>
+    <option value="0.55">0.55</option>
+    <option value="0.6">0.6</option>
+    <option value="0.8">0.8</option>
+  </select>
+</div> --}}
 
   <button type="submit" id="makePlanBtn">Make a Plan</button>
 
@@ -64,3 +105,4 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 <script src="./javascripts/APIhandler.js"></script>
+<script src="./javascripts/requesterResults.js"></script>

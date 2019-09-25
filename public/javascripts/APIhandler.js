@@ -11,14 +11,17 @@ makePlanBtn.addEventListener("click", function(event) {
   });
 
   const accessibility = document.getElementById("accessibility").value;
-  const price = document.getElementById("price").value;
-  const participants = document.getElementById("participants").value;
+  // const price = document.getElementById("price").value;
+  // const participants = document.getElementById("participants").value;
 
   axios
     .get(
-      `${boredApiUrl}/?type=${typeQ}&participants=${participants}&minprice=0&maxprice=${price}&minaccessibility=0&maxaccessibility=${accessibility}`
+      // `${boredApiUrl}/?type=${typeQ}&participants=${participants}&minprice=0&maxprice=${price}&minaccessibility=0&maxaccessibility=${accessibility}`
+      `${boredApiUrl}/?type=${typeQ}&minaccessibility=0&maxaccessibility=${accessibility}`
+    
     )
     .then(({ data }) => {
+      
       myPlan.innerHTML = ``;
       myPlan.innerHTML += `
       <form action="/plans" method="post">
@@ -32,6 +35,7 @@ makePlanBtn.addEventListener("click", function(event) {
           <input id="typeForm" type="text" name="typeForm" value="${data.type}">
         </div>
 
+        <!--
         <div class="form-group">
           <label for="participantsForm">Participants</label>
           <input id="participantsForm" type="text" name="participantsForm" value="${data.participants}">
@@ -41,6 +45,7 @@ makePlanBtn.addEventListener("click", function(event) {
           <label for="linkForm">Link</label>
           <input id="linkForm" type="text" name="linkForm" value="${data.link}">
         </div>
+        -->
 
         <button type="submit">Save this Plan!</button>
     </form>

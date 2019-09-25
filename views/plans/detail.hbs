@@ -15,6 +15,29 @@ Participants: {{plan.participants}}
 Invitees: {{plan.invitees}}
 Confirmed: {{plan.confirmed}}
 
+
+<br><br><br>
+
+<form action="/plans/{{plan._id}}/edit" method="post">
+  <div class="form-group">
+    <label for="date">Select date</label>
+    <input type="date" name="date" placeholder="Date" />
+  </div>
+  <div class="form-group">
+    <button type="submit">Date</button>
+  </div>
+
+  <h3>Time only</h3>
+  <div class="ui calendar" id="example3">
+    <div class="ui input left icon">
+      <i class="time icon"></i>
+      <input type="text" placeholder="Time">
+    </div>
+  </div>
+</form>
+
+<br><br><br>
+
 <h3 class="title">Comments ({{plan.comment.length}})</h3>
 
   {{#if plan.comment}}

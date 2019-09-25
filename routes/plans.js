@@ -19,8 +19,8 @@ router.post("/plans", (req, res, next) => {
     participants: participantsForm,
     link: linkForm
   })
-    .then(() => {
-      res.redirect("back");
+    .then(createdPlan => {
+      res.redirect(`/plans/${createdPlan._id}`);
     })
     .catch(error => next(error));
 });
