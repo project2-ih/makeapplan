@@ -1,0 +1,12 @@
+<h1>My plans ({{plans.length}})</h1>
+
+{{#if plans}}
+<ul>
+  {{#each plans}}
+  <li><a href="/plans/{{_id}}">{{activity}}</a></li>
+  {{/each}}
+</ul>
+
+  {{else}}
+  <h4>You don't have plans yet</h4>
+{{/if}}

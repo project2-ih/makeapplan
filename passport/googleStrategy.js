@@ -15,21 +15,19 @@ passport.use(
       callbackURL: "/auth/google/callback"
     },
     (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleID: profile.id })
+      User.findOne({ googleId: profile.id })
         .then(user => {
           if (user) {
             done(null, user);
             return;
           }
 
-          const confirmationCode = crypto.randomBytes(20).toString("hex");
-
           User.create({
             googleId: profile.id,
             username: profile.name.givenName,
             profilePhoto: profile.photos[0].value,
             email: profile.emails[0].value,
-            confirmationCode
+            status: "Active"
           })
             .then(newUser => {
               done(null, newUser);

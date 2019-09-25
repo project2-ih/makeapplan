@@ -17,7 +17,6 @@ passport.use(
     },
 
     (accessToken, refreshToken, profile, done) => {
-      console.log(profile)
       User.findOne({ facebookId: profile.id })
         .then(user => {
           if (user) {
@@ -25,14 +24,11 @@ passport.use(
             return;
           }
 
-          const confirmationCode = crypto.randomBytes(20).toString("hex");
-
           User.create({
             facebookId: profile.id,
             username: profile.displayName,
             profilePhoto: `https://graph.facebook.com/${profile.id}/picture?width=360&height=360 `,
-            // email: profile.email,
-            confirmationCode
+            status: "Active"
           })
             .then(newUser => {
               done(null, newUser);

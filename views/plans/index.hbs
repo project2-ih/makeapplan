@@ -1,0 +1,66 @@
+<h1>Plans!</h1>
+
+<form>
+  <div class="form-group">
+    <input type="radio" name="type" value="education" checked />
+    <label for="education">Education</label>
+
+    <input type="radio" name="type" value="recreational" />
+    <label for="recreational">Recreational</label>
+
+    <input type="radio" name="type" value="social" />
+    <label for="social">Social</label>
+
+    <input type="radio" name="type" value="diy" />
+    <label for="diy">DIY</label>
+
+    <input type="radio" name="type" value="charity" />
+    <label for="charity">Charity</label>
+
+    <input type="radio" name="type" value="cooking" />
+    <label for="cooking">Cooking</label>
+
+    <input type="radio" name="type" value="relaxation" />
+    <label for="relaxation">Relaxation</label>
+
+    <input type="radio" name="type" value="music" />
+    <label for="music">Music</label>
+
+    <input type="radio" name="type" value="busywork" />
+    <label for="busywork">Busywork</label>
+  </div>
+
+  <div class="form-group">
+    <label for="accessibility">Accessibility</label>
+    <input id="accessibility" type="range" min="0.0" max="0.8" step="0.4" value="0" name="accessibility">
+  </div>
+
+  <div class="form-group">
+    <label for="participants">Participants</label>
+    {{!-- <input id="participants" type="range" min="1" max="8" step="1" value="0" name="participants"> --}}
+
+    <select name="participants" id="available">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+    <label for="price">Price</label>
+    <input id="price" type="range" min="0.0" max="0.6" step="0.3" value="0" name="price">
+  </div>
+
+  <button type="submit" id="makePlanBtn">Make a Plan</button>
+
+</form>
+
+<div id="myPlan"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<script src="./javascripts/APIhandler.js"></script>

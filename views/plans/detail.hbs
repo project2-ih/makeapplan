@@ -1,0 +1,48 @@
+<h1>Plan: {{plan.activity}}</h1>
+<span>{{moment plan.createdAt fromNow=true}} ago</span>
+
+  {{#plan.creatorId}}
+  <div class="user-info">
+    <img class="user-avatar" src="{{profilePhoto}}" alt="{{username}} profile picture">
+    <h4>by <a href="/{{_id}}">{{username}}</a></h4>
+  </div>
+  {{/plan.creatorId}}
+
+{{#if plan}}
+Type: {{plan.type}}
+Participants: {{plan.participants}}
+
+Invitees: {{plan.invitees}}
+Confirmed: {{plan.confirmed}}
+
+<h3 class="title">Comments ({{plan.comment.length}})</h3>
+
+  {{#if plan.comment}}
+  <ul>
+    {{#each plan.comment}}
+    <li>
+      <div class="user-info">
+        <img class="user-avatar" src="{{authorId.profilePhoto}}" alt="{{authorId.username}} profile picture">
+        <h4>by <a href="/{{authorId._id}}">{{authorId.username}}</a></h4>
+      </div>
+      <p>{{comment}}</p>
+    </li>
+    {{/each}}
+  </ul>
+
+  {{else}}
+  <p>There are no comments for this entry</p>
+  {{/if}}
+
+<form action="/plans/{{plan._id}}/edit" method="post">
+  <div class="form-group">
+    <input type="text" name="comment" placeholder="Your comments" />
+  </div>
+  <div class="form-group">
+    <button type="submit">Add</button>
+  </div>
+</form>
+
+{{else}}
+<h4>This plan doesn't exist</h4>
+{{/if}}

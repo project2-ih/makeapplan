@@ -4,15 +4,17 @@ const router = express.Router();
 const User = require("../models/User");
 const uploadCloud = require("../configs/cloudinary");
 
+// TODO: Check how to implement JIMP
+
+// const Jimp = require("jimp");
+
 const transporter = require("../modules/nodemailer/nodemailer");
 const template = require("../modules/nodemailer/email-template");
 const htmlToText = require("html-to-text");
 
-// Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
-// Crypto
 const crypto = require("crypto");
 
 router.get("/auth/login", (req, res, next) => {
@@ -55,6 +57,20 @@ router.post(
       const hashedPassword = bcrypt.hashSync(password, salt);
       const confirmationCode = crypto.randomBytes(20).toString("hex");
 
+      // TODO: Check how to implement JIMP
+
+      // const imgProcessed = Jimp.read(req.file)
+      // .then(img => {
+      //   return img
+      //     .resize(256, 256)
+      //     .quality(60)
+      //     .greyscale()
+      //     .write(`${req.file.originalname}`);
+      // })
+      // .catch(err => {
+      //   console.error(err);
+      // });
+      
       User.create({
         username,
         password: hashedPassword,
@@ -62,34 +78,27 @@ router.post(
         profilePhoto: url,
         confirmationCode
       })
-        // .then(() => {
-        //   res.redirect("/");
-        // })
-        // .catch(err => {
-        //   res.render("auth/signup", { message: "Something went wrong" });
-        // });
+      .then(data => {
+        const text = htmlToText.fromString(
+          template.emailTemplate(confirmationCode, data),
+          { wordwrap: 130 }
+        );
 
-        .then(data => {
-          const text = htmlToText.fromString(
-            template.emailTemplate(confirmationCode, data),
-            { wordwrap: 130 }
-          );
-
-          transporter
-            .sendMail({
-              from: `Makeapplan | Don't be bored again!`,
-              to: data.email,
-              subject: "Email confirmation",
-              text: text,
-              html: template.emailTemplate(confirmationCode, data)
-            })
-            .then(() => {
-              res.redirect("/");
-            })
-            .catch(err => {
-              res.render("auth/signup", { message: "Something went wrong" });
-            });
-        });
+        transporter
+          .sendMail({
+            from: `Makeapplan | Don't be bored again!`,
+            to: data.email,
+            subject: "Email confirmation",
+            text: text,
+            html: template.emailTemplate(confirmationCode, data)
+          })
+          .then(() => {
+            res.redirect("/auth/login");
+          })
+          .catch(err => {
+            res.render("auth/signup", { message: "Something went wrong" });
+          });
+      });
     });
   }
 );
@@ -120,6 +129,10 @@ router.get("/auth/confirmation-success", (req, res) => {
   res.render("email/confirmation-success");
 });
 
+router.get("/auth/confirmation-failed", (req, res) => {
+  res.render("email/confirmation-failed");
+});
+
 // Social
 
 router.get("/auth/facebook", passport.authenticate("facebook"));
@@ -146,7 +159,7 @@ router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
     successRedirect: "/",
-    failureRedirect: "/" // here you would redirect to the login page using traditional login approach
+    failureRedirect: "/"
   })
 );
 
