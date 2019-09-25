@@ -4,7 +4,7 @@
   {{#plan.creatorId}}
   <div class="user-info">
     <img class="user-avatar" src="{{profilePhoto}}" alt="{{username}} profile picture">
-    <h4>by <a href="/{{_id}}">{{username}}</a></h4>
+    <h4>by <a href="/auth/profile/{{_id}}">{{username}}</a></h4>
   </div>
   {{/plan.creatorId}}
 
@@ -15,24 +15,24 @@ Participants: {{plan.participants}}
 Invitees: {{plan.invitees}}
 Confirmed: {{plan.confirmed}}
 
+{{#if plan.date}}
+  <h3>Hour</h3>
+  {{moment plan.date format="dddd DD MMMM - HH:mm"}}
+{{/if}}
 
-<br><br><br>
-
-<form action="/plans/{{plan._id}}/edit" method="post">
+<form action="/plans/{{plan._id}}/edit-date" method="post">
   <div class="form-group">
     <label for="date">Select date</label>
     <input type="date" name="date" placeholder="Date" />
   </div>
+
   <div class="form-group">
-    <button type="submit">Date</button>
+    <label for="time">Time</label>
+    <input type="time" name="time">
   </div>
 
-  <h3>Time only</h3>
-  <div class="ui calendar" id="example3">
-    <div class="ui input left icon">
-      <i class="time icon"></i>
-      <input type="text" placeholder="Time">
-    </div>
+  <div class="form-group">
+    <button type="submit">Confirm</button>
   </div>
 </form>
 

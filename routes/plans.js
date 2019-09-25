@@ -59,6 +59,24 @@ router.post("/plans/:id/edit", (req, res) => {
     .catch(error => next(error));
 });
 
+
+router.post("/plans/:id/edit-date", (req, res) => {
+  const date = req.body.date;
+  const time = req.body.time;
+  const planDate = new Date(`${date} ${time}`).toLocaleString();
+
+  Plan.findByIdAndUpdate(
+    req.params.id,
+    { date: planDate },
+    { new: true }
+  )
+    .then(() => {
+      res.redirect("back");
+    })
+    .catch(error => next(error));
+});
+
+
 router.get("/plans", (req, res, next) => {
   Plan.find({ creatorId: req.user._id })
   .then(plans => {

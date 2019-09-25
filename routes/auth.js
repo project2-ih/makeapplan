@@ -108,6 +108,13 @@ router.get("/auth/logout", (req, res) => {
   res.redirect("/");
 });
 
+router.get("/auth/profile/:id", (req, res) => {
+  User.findById(req.params.id)
+  .then(user => {
+    res.render("auth/profile", { user });
+  })
+});
+
 // Account confirmation
 
 router.get("/auth/confirmation/:confirmationCode", (req, res) => {
