@@ -1,8 +1,271 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
-a {
-  color: #00B7FF;
+/* ********************************
+********************************
+******************************** */
+/* #makeapplanlogo {
+  transform: translate(calc(50vh - 333px), calc(50vw - 190px));
+} */
+/* @media screen and (min-width: 375px) {
+}
+@media screen and (min-width: 768px) {
+}
+@media screen and (min-width: 960px) {
+} */
+
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 10px;
+}
+body {
+  background: linear-gradient(rgba(7, 29, 39, 1), rgba(7, 29, 39, 0.9));
+}
+h3 {
+  font-family: "Didact Gothic", sans-serif;
+  font-size: 25px;
+  color: #5f737d;
+}
+h4 {
+  font-family: "Didact Gothic", sans-serif;
+  font-size: 20px;
+  color: white;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.btn-getstarted {
+  font-family: "Didact Gothic", sans-serif;
+  background: #0e242f;
+  color: #5f737d;
+  border-radius: 20px;
+  border: none;
+  padding: 2rem 3rem;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-box-shadow: 15px 13px 32px -8px rgba(0,0,0,0.57);
+  -moz-box-shadow: 15px 13px 32px -8px rgba(0,0,0,0.57);
+  box-shadow: 15px 13px 32px -8px rgba(0,0,0,0.57);
+}
+.btn-getstarted:focus {
+  outline: 0;
+}
+.btn-getstarted a {
+  font-size: 25px;
+  color: #5f737d;
+  background: #0e242f;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+}
+.btn-email {
+   font-family: "Didact Gothic", sans-serif;
+  background: #0e242f;
+  color: #5f737d;
+  border-radius: 20px;
+  border: none;
+  padding: 2rem 3rem;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-box-shadow: 15px 13px 32px -8px rgba(0,0,0,0.57);
+  -moz-box-shadow: 15px 13px 32px -8px rgba(0,0,0,0.57);
+  box-shadow: 15px 13px 32px -8px rgba(0,0,0,0.57);
+}
+.btn-email:focus {
+  outline: 0;
+}
+.btn-email a {
+  font-size: 25px;
+  color: #5f737d;
+  background: #0e242f;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+}
+.btn-google {
+  background: #fffff;
+  color: #5f737d;
+  border-radius: 20px;
+  border: none;
+  padding: 2rem 3rem;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-box-shadow: 15px 13px 32px -8px rgba(0,0,0,0.57);
+  -moz-box-shadow: 15px 13px 32px -8px rgba(0,0,0,0.57);
+  box-shadow: 15px 13px 32px -8px rgba(0,0,0,0.57);
+}
+.btn-google:focus {
+  outline: 0;
+}
+.btn-facebook {
+  background: #3B5998;
+  color: #5f737d;
+  border-radius: 20px;
+  border: none;
+  padding: 2rem 3rem;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-box-shadow: 15px 13px 32px -8px rgba(0,0,0,0.57);
+  -moz-box-shadow: 15px 13px 32px -8px rgba(0,0,0,0.57);
+  box-shadow: 15px 13px 32px -8px rgba(0,0,0,0.57);
+}
+.btn-facebook:focus {
+  outline: 0;
+}
+.btn-signup {
+  font-family: "Didact Gothic", sans-serif;
+  background: #0e242f;
+  color: #5f737d;
+  border-radius: 20px;
+  border: none;
+  padding: 2rem 3rem;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-box-shadow: 15px 13px 32px -8px rgba(0,0,0,0.57);
+  -moz-box-shadow: 15px 13px 32px -8px rgba(0,0,0,0.57);
+  box-shadow: 15px 13px 32px -8px rgba(0,0,0,0.57);
+}
+.btn-signup:focus {
+  outline: 0;
+}
+.btn-signup a {
+  font-size: 25px;
+  color: #5f737d;
+  background: #0e242f;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+}
+.actions {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  padding: 5rem 2rem;
 }
