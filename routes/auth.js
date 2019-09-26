@@ -127,7 +127,10 @@ router.get("/auth/confirmation-failed", (req, res) => {
 
 // Social
 
-router.get("/auth/facebook", passport.authenticate("facebook"));
+router.get("/auth/facebook", passport.authenticate("facebook", 
+{
+  scope: ["email"]
+}));
 
 router.get(
   "/auth/facebook/callback",
