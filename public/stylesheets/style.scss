@@ -4,11 +4,23 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
 }
-
 
 img {
   width: 100%;
   max-width: 140px;
 }
+
+.invitations {
+  position: relative;
+}
+
+// #search-results {
+//   background: white;
+//   position: absolute;
+//   width: 100%;
+//   top: 20px;
+//   left: 0;
+//   padding: 10px;
+// }

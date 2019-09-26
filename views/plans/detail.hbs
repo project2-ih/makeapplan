@@ -1,24 +1,39 @@
 <h1>Plan: {{plan.activity}}</h1>
 <span>{{moment plan.createdAt fromNow=true}} ago</span>
 
-  {{#plan.creatorId}}
-  <div class="user-info">
-    <img class="user-avatar" src="{{profilePhoto}}" alt="{{username}} profile picture">
-    <h4>by <a href="/auth/profile/{{_id}}">{{username}}</a></h4>
-  </div>
-  {{/plan.creatorId}}
-
-{{#if plan}}
-Type: {{plan.type}}
-Participants: {{plan.participants}}
-
-Invitees: {{plan.invitees}}
-Confirmed: {{plan.confirmed}}
+{{#plan.creatorId}}
+<div class="user-info">
+  <img class="user-avatar" src="{{profilePhoto}}" alt="{{username}} profile picture">
+  <h4>by <a href="/auth/profile/{{_id}}">{{username}}</a></h4>
+</div>
+{{/plan.creatorId}}
 
 {{#if plan.date}}
   <h3>Hour</h3>
   {{moment plan.date format="dddd DD MMMM - HH:mm"}}
 {{/if}}
+
+{{#if plan}}
+<h4>Type:</h4>
+<p>{{plan.type}}</p>
+
+{{#if plan.invitees}}
+  <h4>Invitees:</h4>
+    <ul>
+    {{#each plan.invitees}}
+      <li>
+        <a href="/auth/profile/{{_id}}">{{username}}</a>
+
+        <form action="/plans/{{../plan._id}}/deleteInvitee/{{_id}}" method="post">
+          <button type="submit">Remove from list</button>
+        </form>
+      </li>
+    {{/each}}
+    </ul>
+{{/if}}
+
+<h4>Confirmed:</h4>
+<p>{{plan.confirmed}}</p>
 
 <form action="/plans/{{plan._id}}/edit-date" method="post">
   <div class="form-group">
@@ -38,24 +53,45 @@ Confirmed: {{plan.confirmed}}
 
 <br><br><br>
 
+<h3 class="title">Invite a friend</h3>
+
+<div class="invitations">
+  <form>
+    <div class="form-group">
+      <label for="search">Search a friend</label>
+      <input id="searchInput" type="text" name="search" placeholder="" />
+    </div>
+  </form>
+
+  <div style="display: flex; width: 100vw;">
+    <div id="search-results"></div>
+    <div id="invited-users">
+      <ul></ul>
+      <button onclick="sendEmails()">Invite</button>
+    </div>
+  </div>
+</div>
+
+<br><br><br>
+
 <h3 class="title">Comments ({{plan.comment.length}})</h3>
 
-  {{#if plan.comment}}
-  <ul>
-    {{#each plan.comment}}
-    <li>
-      <div class="user-info">
-        <img class="user-avatar" src="{{authorId.profilePhoto}}" alt="{{authorId.username}} profile picture">
-        <h4>by <a href="/{{authorId._id}}">{{authorId.username}}</a></h4>
-      </div>
-      <p>{{comment}}</p>
-    </li>
-    {{/each}}
-  </ul>
+{{#if plan.comment}}
+<ul>
+  {{#each plan.comment}}
+  <li>
+    <div class="user-info">
+      <img class="user-avatar" src="{{authorId.profilePhoto}}" alt="{{authorId.username}} profile picture">
+      <h4>by <a href="/{{authorId._id}}">{{authorId.username}}</a></h4>
+    </div>
+    <p>{{comment}}</p>
+  </li>
+  {{/each}}
+</ul>
 
-  {{else}}
-  <p>There are no comments for this entry</p>
-  {{/if}}
+{{else}}
+<p>There are no comments for this entry</p>
+{{/if}}
 
 <form action="/plans/{{plan._id}}/edit" method="post">
   <div class="form-group">
@@ -69,3 +105,75 @@ Confirmed: {{plan.confirmed}}
 {{else}}
 <h4>This plan doesn't exist</h4>
 {{/if}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+{{!-- <script src="./javascripts/APIhandler.js"></script> --}}
+
+<script>
+  let chosenUsers = [];
+
+  function sendEmails() {
+    if (chosenUsers.length > 0) {
+      chosenUsers.forEach(user => {
+        axios.post("{{host}}/plans/{{plan._id}}/invite/" + user.userID)
+      })
+    }
+  }
+  
+  function addUser(userID, username) {
+    addToChosenUsers(userID, username)
+    updateChosenUsersList()
+  }
+  
+  function addToChosenUsers(userID, username) {
+    if(chosenUsers.find(user=> user.username == username)){
+      chosenUsers.splice((chosenUsers.indexOf(chosenUsers.find(user=> user.username == username))),1)
+      
+    } else {
+      chosenUsers.push({ userID, username })
+    }
+  }
+
+  function updateChosenUsersList() {
+    invitedUsers.querySelector("ul").innerHTML = "";
+
+    chosenUsers.forEach(user => {
+      let chosenUserDOMEl = document.createElement("li")
+      chosenUserDOMEl.innerHTML = user.username
+      invitedUsers.querySelector("ul").appendChild(chosenUserDOMEl)
+    })
+  }
+
+  // const reqUsers = `${process.env.HOST}/api/users`;
+  const reqUsers = `http://localhost:3000/api/users`;
+
+  const searchResults = document.getElementById("search-results");
+  const invitedUsers = document.getElementById("invited-users");
+
+  searchInput.addEventListener("keyup", function () {
+    axios.get(reqUsers)
+      .then(results => {
+
+        results = results.data;
+
+        const wordToSearch = searchInput.value.toLowerCase();
+        const match = results.filter(user => user.username.toLowerCase().includes(wordToSearch));
+
+        if (!wordToSearch) {
+          searchResults.innerHTML = ``;
+        } else {
+          let usersMatch = match.map(user => {
+            return `
+          <div class="invited">
+            <form action="/plans/:id/invite" method="post">
+              <label><input type="checkbox" class="check" value="${user._id}" onclick="addUser('${user._id}', '${user.username}')">${user.username}</label>
+            </form>            
+          </div>
+        `;
+          }).join("");
+
+          searchResults.innerHTML = usersMatch
+        }
+      });
+  });
+</script>

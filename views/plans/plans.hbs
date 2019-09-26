@@ -4,6 +4,10 @@
 <ul>
   {{#each plans}}
   <li><a href="/plans/{{_id}}">{{activity}}</a></li>
+
+  <form action="/plans/{{_id}}/delete" method="post">
+    <button type="submit">Delete</button>
+  </form>
   {{/each}}
 </ul>
 

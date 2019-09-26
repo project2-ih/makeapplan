@@ -1,12 +1,10 @@
+require('dotenv').config();
+
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
 const User = require("../models/User");
 const uploadCloud = require("../configs/cloudinary");
-
-// TODO: Check how to implement JIMP
-
-// const Jimp = require("jimp");
 
 const transporter = require("../modules/nodemailer/nodemailer");
 const template = require("../modules/nodemailer/email-template");
@@ -56,20 +54,7 @@ router.post(
       const salt = bcrypt.genSaltSync(bcryptSalt);
       const hashedPassword = bcrypt.hashSync(password, salt);
       const confirmationCode = crypto.randomBytes(20).toString("hex");
-
-      // TODO: Check how to implement JIMP
-
-      // const imgProcessed = Jimp.read(req.file)
-      // .then(img => {
-      //   return img
-      //     .resize(256, 256)
-      //     .quality(60)
-      //     .greyscale()
-      //     .write(`${req.file.originalname}`);
-      // })
-      // .catch(err => {
-      //   console.error(err);
-      // });
+      const host = `${process.env.HOST}`;
       
       User.create({
         username,
@@ -80,7 +65,7 @@ router.post(
       })
       .then(data => {
         const text = htmlToText.fromString(
-          template.emailTemplate(confirmationCode, data),
+          template.emailTemplate(confirmationCode, data, host),
           { wordwrap: 130 }
         );
 

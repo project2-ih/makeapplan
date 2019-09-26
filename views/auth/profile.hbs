@@ -1,3 +1,18 @@
 <h1>My profile</h1>
 
-{{user}}
+{{#if user}}
+
+<div class="user-info">
+  <img class="user-avatar" src="{{user.profilePhoto}}" alt="{{user.username}} profile picture">
+  <h4>{{user.username}}</h4>
+  <small>Status: {{user.status}}</small>
+  {{#if user.email}}
+  <p>
+    {{user.email}}
+  </p>
+  {{/if}}
+  <p>
+    Account created: {{moment user.createdAt format="DD MMMM YYYY"}}
+  </p>
+</div>
+{{/if}}

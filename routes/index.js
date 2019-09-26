@@ -7,6 +7,8 @@ router.use('/', authRoutes);
 const plansRoutes = require('./plans');
 router.use('/', plansRoutes);
 
+const apiRoutes = require('./api');
+router.use('/', apiRoutes);
 
 router.get('/', (req, res, next) => {
   res.render('index');
