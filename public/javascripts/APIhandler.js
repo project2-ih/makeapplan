@@ -1,6 +1,4 @@
 const boredApiUrl = "http://www.boredapi.com/api/activity";
-// const reqUsers = `${process.env.HOST}/api/users`;
-// console.log("reqUsers", reqUsers);
 
 const myPlan = document.getElementById("myPlan");
 
@@ -37,26 +35,8 @@ makePlanBtn.addEventListener("click", function(event) {
           <input id="linkForm" type="text" name="linkForm" value="${data.link}">
         </div>
 
-        <button type="submit">Save this Plan!</button>
+        <button class="btn btn-primary" type="submit">Save this Plan!</button>
     </form>
     `;
     });
 });
-
-// const searchResults = document.getElementById("search-results");
-
-// searchInput.addEventListener("change", function(e) {
-//   console.log(e);
-  
-//   axios.get(reqUsers)
-//   .then(({ users }) => {
-//     console.log(users)
-//     const match = users.filter(user => user.username === searchInput.value);
-    
-//     searchResults.innerHTML = ``;
-//     searchResults.innerHTML += `
-//     <p>${users.username}</p>
-//     <p>${match}</p>
-// `;
-//   });
-// });

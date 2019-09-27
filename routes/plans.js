@@ -97,8 +97,7 @@ router.post("/plans/:id/delete", (req, res) => {
 });
 
 router.post("/plans/:id/invite/:userId", (req, res, next) => {
-  // TODO: HOST
-  const host = process.env.HEROKU_HOST
+  const host = process.env.HEROKU_HOST;
   Plan.findById(req.params.id).then(plan => {
     const { invitees } = plan;
 
@@ -113,8 +112,6 @@ router.post("/plans/:id/invite/:userId", (req, res, next) => {
         return User.findById(eachInvitation[0])
           .then(invitedUser => {
             const text = htmlToText.fromString(
-              // TODO: HOST
-              // TODO: PASS the plan id to the template
               template.emailTemplate(invitedUser, host),
               { wordwrap: 130 }
             )
