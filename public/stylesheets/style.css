@@ -60,7 +60,8 @@ nav {
   display: flex;
   align-items: center;
   background: #2e2f37;
-  padding: 1rem; }
+  padding: 1rem;
+  justify-content: space-between; }
 
 .nav-primary .user-avatar {
   width: 24px;
