@@ -16,7 +16,7 @@ function sendEmails() {
     chosenUsers.forEach(user => {
       const planId = window.location.href.split("/").pop();
       // TODO: switch
-      const reqUsers = `https://makeapplan.herokuapp.com/plans/${planId}/invite/${user.userID}`;
+      const p = `https://makeapplan.herokuapp.com/plans/${planId}/invite/${user.userID}`;
       // const p = axios.post(`http://localhost:3000/plans/${planId}/invite/${user.userID}`);
       promises.push(p);
     });
