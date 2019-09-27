@@ -22,15 +22,22 @@ body {
   color: #444;
 }
 
+body {
+  color: white;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(7, 29, 39, 1);
+}
+
 a {
-  color: #0057ff;
+  color: white;
 }
 
 p {
   font-size: 16px;
   line-height: 1.5;
   margin-bottom: 24px;
-  color: #515151;
+  color: white;
 }
 
 .title,
@@ -43,7 +50,6 @@ p {
 .title {
   font-size: 1.4rem;
   padding: 1rem 0;
-  margin-bottom: 2rem;
   border-bottom: 1px solid #d4d4d4;
 }
 
@@ -74,7 +80,7 @@ nav {
   justify-content: space-between;
   align-content: center;
   padding: 1.1rem 3rem;
-  background-color: #0a2e3e;
+  background-color: #071d27d2;
   -webkit-box-shadow: 15px 13px 32px -8px rgba(0, 0, 0, 0.57);
   -moz-box-shadow: 15px 13px 32px -8px rgba(0, 0, 0, 0.57);
   box-shadow: 15px 13px 32px -8px rgba(0, 0, 0, 0.57);
@@ -90,14 +96,13 @@ nav {
   justify-content: space-between;
   align-content: center;
   padding: 1.1rem 3rem;
-  background-color: #0a2e3e;
   -webkit-box-shadow: 15px 13px 32px -8px rgba(0, 0, 0, 0.57);
   -moz-box-shadow: 15px 13px 32px -8px rgba(0, 0, 0, 0.57);
   box-shadow: 15px 13px 32px -8px rgba(0, 0, 0, 0.57);
 
   display: flex;
   align-items: center;
-  background: #2e2f37;
+  background-color: #071d27d2;
   padding: 1rem;
   justify-content: space-between;
 }
@@ -168,11 +173,11 @@ textarea:focus {
 .form-group {
   display: flex;
   padding: 1.5rem 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #aba9a9ac;
   display: flex;
   align-content: center;
   justify-content: center;
-  flex-direction: column;
+  // flex-direction: column;
 }
 
 .form-group label {
@@ -298,6 +303,7 @@ textarea:focus {
 }
 
 .user-info {
+  padding-top: 2rem;
   display: flex;
   align-items: center;
   padding-bottom: 1rem;
@@ -319,6 +325,7 @@ textarea:focus {
 
 .search-results-container {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0.5rem;
@@ -334,28 +341,137 @@ textarea:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f5f5f58a;
   padding: 0.5rem 0;
 }
 
 @media screen and (max-width: 800px) {
   .container {
     padding: 56px 24px;
+    flex-direction: column;
   }
 
   .activity-type {
     width: 33.33%;
     text-align: left;
+    padding-left: 2rem;
   }
 }
 
 @media screen and (max-width: 420px) {
   .container {
     padding: 56px 24px;
+    flex-direction: column;
   }
 
   .activity-type {
     width: 50%;
     text-align: left;
+    padding-left: 2rem;
   }
+}
+
+.plan label {
+  font-size: 16px;
+  font-family: "Didact Gothic", sans-serif;
+  margin: 5px;
+}
+.activity-type img {
+  height: 70px;
+  width: 70px;
+}
+.plan-click {
+  display: flex;
+  justify-items: flex-end;
+  align-items: center;
+  flex-direction: row;
+}
+#activities-group {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  flex-wrap: wrap;
+  margin: 10px;
+  margin-bottom: 24px;
+}
+
+#form-accesibility {
+  font-family: "Didact Gothic", sans-serif;
+  font-size: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 14px 10px;
+  flex-direction: column;
+}
+#form-accesibility2 {
+  flex-direction: column;
+}
+select {
+  color: white;
+  background-color: #184357d2;
+  border-radius: 10px;
+  border: none;
+  padding: 5px 50px;
+  margin: 10px;
+}
+
+#activityForm {
+  width: 90vw;
+  color: white;
+  font-size: 19px;
+  padding: 10px 5px;
+  margin: 10px 5px;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+#typeForm {
+  color: white;
+  font-size: 19px;
+  padding: 10px 5px;
+  margin: 10px 5px;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+#linkForm {
+  color: white;
+  font-size: 19px;
+  padding: 10px 5px;
+  margin: 10px 5px;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+#select-day {
+  background-color: #1a3645ab;
+  border-radius: 15px;
+  color: white;
+  border: none;
+}
+#select-time {
+  background-color: #1a3645ab;
+  border-radius: 15px;
+  color: white;
+  border: none;
+}
+#searchInput {
+  background-color: #1a3645ab;
+  border-radius: 15px;
+  color: white;
+  border: none;
+}
+#your-comment {
+  background-color: #1a3645ab;
+  border-radius: 15px;
+  color: white;
+  border: none;
+}
+::placeholder {
+  color: white;
 }

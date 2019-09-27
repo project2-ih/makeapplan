@@ -1,86 +1,115 @@
 <div class="container">
-  <h1 class="title">Make a Plan</h1>
+  <form>
+    <div class="form-group flex-wrap">
+      <div id="activities-group">
 
-<form>
-  <div class="form-group flex-wrap">
+      <div class="activity-type">
+        <img src="./images/DIY.png" alt="DIY">
+        <div class="plan-click">
+          <input type="radio" name="type" class="radio diy" value="diy" />
+          <label for="diy">DIY</label>
+        </div>
+      </div>
 
-    <div class="activity-type">
-    <img src="" alt="">
-    <input type="radio" name="type" class="radio education" value="education" />
-    <label for="education">Education</label>
+      <div class="activity-type">
+        <img src="./images/Recreational.png" alt="Recreational">
+        <div class="plan-click">
+          <input type="radio" name="type" class="radio recreational" value="recreational" />
+          <label for="recreational">Fun</label>
+        </div>
+      </div>
+
+      <div class="activity-type">
+        <img src="./images/Music.png" alt="Music">
+        <div class="plan-click">
+          <input type="radio" name="type" class="radio music" value="music" />
+          <label for="music">Music</label>
+        </div>
+      </div>
+
+      <div class="activity-type">
+        <img src="./images/Cooking.png" alt="Cooking">
+        <div class="plan-click">
+          <input type="radio" name="type" class="radio cooking" value="cooking" />
+          <label for="cooking">Cooking</label>
+        </div>
+      </div>
+
+      <div class="activity-type">
+        <img src="./images/Relaxation.png" alt="Relax">
+        <div class="plan-click">
+          <input type="radio" name="type" class="radio relaxation" value="relaxation" />
+          <label for="relaxation">Relaxation</label>
+        </div>
+      </div>
+
+      <div class="activity-type">
+        <img src="./images/Social.png" alt="Social">
+        <div class="plan-click">
+          <input type="radio" name="type" class="radio social" value="social" />
+          <label for="social">Social</label>
+        </div>
+      </div>
+
+      <div class="activity-type">
+        <img src="./images/Busywork.png" alt="Busywork">
+        <div class="plan-click">
+          <input type="radio" name="type" class="radio busywork" value="busywork" />
+          <label for="busywork">Busywork</label>
+        </div>
+      </div>
+
+      <div class="activity-type">
+        <img src="./images/Educational.png" alt="Education">
+        <div class="plan-click">
+          <input type="radio" name="type" class="radio education" value="education" />
+          <label for="education">Education</label>
+        </div>
+      </div>
+
+      <div class="activity-type">
+        <img src="./images/Charity.png" alt="Charity">
+        <div class="plan-click">
+          <input type="radio" name="type" class="radio charity" value="charity" />
+          <label for="charity">Charity</label>
+        </div>
+      </div>
+
+     </div>
+    </div>
+    
+    <div id="form-accesibility">
+    <div class="form-group" id="form-accesibility2">
+      <label for="accessibility">Laziness</label>
+      <select name="accessibility" id="accessibility" class="accessibilityAvailable">
+        <option value="0">0</option>
+        <option value="0.02">0.02</option>
+        <option value="0.05">0.05</option>
+        <option value="0.07">0.07</option>
+        <option value="0.08">0.08</option>
+        <option value="0.1">0.1</option>
+        <option value="0.12">0.12</option>
+        <option value="0.15">0.15</option>
+        <option value="0.2">0.2</option>
+        <option value="0.25">0.25</option>
+        <option value="0.3">0.3</option>
+        <option value="0.32">0.32</option>
+        <option value="0.35">0.35</option>
+        <option value="0.4">0.4</option>
+        <option value="0.5">0.5</option>
+        <option value="0.6">0.6</option>
+        <option value="0.7">0.7</option>
+        <option value="0.8">0.8</option>
+        <option value="0.9">0.9</option>
+        <option value="1">1</option>
+      </select>
+    </div>
     </div>
 
-    <div class="activity-type">
-    <input type="radio" name="type" class="radio recreational" value="recreational" />
-    <label for="recreational">Recreational</label>
-    </div>
+    <button class="btn btn-primary" type="submit" id="makePlanBtn">Make a Plan</button>
+  </form>
 
-    <div class="activity-type">
-    <input type="radio" name="type" class="radio social" value="social" />
-    <label for="social">Social</label>
-    </div>
-
-    <div class="activity-type">
-    <input type="radio" name="type" class="radio diy" value="diy" />
-    <label for="diy">DIY</label>
-    </div>
-
-    <div class="activity-type">
-    <input type="radio" name="type" class="radio charity" value="charity" />
-    <label for="charity">Charity</label>
-    </div>
-
-    <div class="activity-type">
-    <input type="radio" name="type" class="radio cooking" value="cooking" />
-    <label for="cooking">Cooking</label>
-    </div>
-
-    <div class="activity-type">
-    <input type="radio" name="type" class="radio relaxation" value="relaxation" />
-    <label for="relaxation">Relaxation</label>
-    </div>
-
-    <div class="activity-type">
-    <input type="radio" name="type" class="radio music" value="music" />
-    <label for="music">Music</label>
-    </div>
-
-    <div class="activity-type">
-    <input type="radio" name="type" class="radio busywork" value="busywork" />
-    <label for="busywork">Busywork</label>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="accessibility">Laziness</label>
-    <select name="accessibility" id="accessibility" class="accessibilityAvailable">
-      <option value="0">0</option>
-      <option value="0.02">0.02</option>
-      <option value="0.05">0.05</option>
-      <option value="0.07">0.07</option>
-      <option value="0.08">0.08</option>
-      <option value="0.1">0.1</option>
-      <option value="0.12">0.12</option>
-      <option value="0.15">0.15</option>
-      <option value="0.2">0.2</option>
-      <option value="0.25">0.25</option>
-      <option value="0.3">0.3</option>
-      <option value="0.32">0.32</option>
-      <option value="0.35">0.35</option>
-      <option value="0.4">0.4</option>
-      <option value="0.5">0.5</option>
-      <option value="0.6">0.6</option>
-      <option value="0.7">0.7</option>
-      <option value="0.8">0.8</option>
-      <option value="0.9">0.9</option>
-      <option value="1">1</option>
-    </select>
-  </div>
-
-  <button class="btn btn-primary" type="submit" id="makePlanBtn">Make a Plan</button>
-</form>
-
-<div id="myPlan"></div>
+  <div id="myPlan"></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
