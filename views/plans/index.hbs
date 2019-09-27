@@ -1,42 +1,57 @@
-<h1>Plans!</h1>
+<div class="container">
+  <h1 class="title">Make a Plan</h1>
 
 <form>
-  <div class="form-group">
+  <div class="form-group flex-wrap">
+
+    <div class="activity-type">
     <input type="radio" name="type" class="radio education" value="education" />
     <label for="education">Education</label>
+    </div>
 
+    <div class="activity-type">
     <input type="radio" name="type" class="radio recreational" value="recreational" />
     <label for="recreational">Recreational</label>
+    </div>
 
+    <div class="activity-type">
     <input type="radio" name="type" class="radio social" value="social" />
     <label for="social">Social</label>
+    </div>
 
+    <div class="activity-type">
     <input type="radio" name="type" class="radio diy" value="diy" />
     <label for="diy">DIY</label>
+    </div>
 
+    <div class="activity-type">
     <input type="radio" name="type" class="radio charity" value="charity" />
     <label for="charity">Charity</label>
+    </div>
 
+    <div class="activity-type">
     <input type="radio" name="type" class="radio cooking" value="cooking" />
     <label for="cooking">Cooking</label>
+    </div>
 
+    <div class="activity-type">
     <input type="radio" name="type" class="radio relaxation" value="relaxation" />
     <label for="relaxation">Relaxation</label>
+    </div>
 
+    <div class="activity-type">
     <input type="radio" name="type" class="radio music" value="music" />
     <label for="music">Music</label>
+    </div>
 
+    <div class="activity-type">
     <input type="radio" name="type" class="radio busywork" value="busywork" />
     <label for="busywork">Busywork</label>
+    </div>
   </div>
 
-  {{!-- <div class="form-group">
-    <label for="accessibility">Accessibility</label>
-    <input id="accessibility" type="range" min="0.0" max="0.8" step="0.4" value="0" name="accessibility">
-  </div> --}}
-
   <div class="form-group">
-    <label for="accessibility">Accessibility</label>
+    <label for="accessibility">Laziness</label>
     <select name="accessibility" id="accessibility" class="accessibilityAvailable">
       <option value="0">0</option>
       <option value="0.02">0.02</option>
@@ -61,47 +76,11 @@
     </select>
   </div>
 
-  {{!-- <div class="form-group">
-    <label for="participants">Participants</label>
-
-    <select name="participants" id="participants" class="participantsAvailable">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      </select>
-  </div> --}}
-
-{{!-- <div class="form-group">
-  <label for="price">Price</label>
-
-  <select name="prices" id="price" class="pricesAvailable">
-    <option value="0">0</option>
-    <option value="0.02">0.02</option>
-    <option value="0.05">0.05</option>
-    <option value="0.08">0.08</option>
-    <option value="0.1">0.1</option>
-    <option value="0.15">0.15</option>
-    <option value="0.2">0.2</option>
-    <option value="0.25">0.25</option>
-    <option value="0.3">0.3</option>
-    <option value="0.4">0.4</option>
-    <option value="0.5">0.5</option>
-    <option value="0.55">0.55</option>
-    <option value="0.6">0.6</option>
-    <option value="0.8">0.8</option>
-  </select>
-</div> --}}
-
-  <button type="submit" id="makePlanBtn">Make a Plan</button>
-
+  <button class="btn btn-primary" type="submit" id="makePlanBtn">Make a Plan</button>
 </form>
 
 <div id="myPlan"></div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 <script src="./javascripts/APIhandler.js"></script>

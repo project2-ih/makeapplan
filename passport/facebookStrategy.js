@@ -13,7 +13,7 @@ passport.use(
       clientID: `${process.env.FACEBOOK_APP_ID}`,
       clientSecret: `${process.env.FACEBOOK_APP_SECRET}`,
       callbackURL: "/auth/facebook/callback",
-      profileFields: ["id", "displayName", "photos", "email"]
+      profileFields: ["id", "displayName", "photos", "emails"]
     },
 
     (accessToken, refreshToken, profile, done) => {
@@ -27,6 +27,7 @@ passport.use(
           User.create({
             facebookId: profile.id,
             username: profile.displayName,
+            email: profile.emails[0].value,
             profilePhoto: `https://graph.facebook.com/${profile.id}/picture?width=360&height=360 `,
             status: "Active"
           })

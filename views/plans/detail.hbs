@@ -1,44 +1,78 @@
-<h1>Plan: {{plan.activity}}</h1>
-<span>{{moment plan.createdAt fromNow=true}} ago</span>
+<div class="container">
+  <h1 class="title">{{plan.activity}}</h1>
 
   {{#plan.creatorId}}
   <div class="user-info">
     <img class="user-avatar" src="{{profilePhoto}}" alt="{{username}} profile picture">
-    <h4>by <a href="/auth/profile/{{_id}}">{{username}}</a></h4>
+    <h4>by <a href="/auth/profile/{{_id}}">{{username}}</a>
+      <span class="when">{{moment createdAt fromNow=true}} ago</span></h4>
   </div>
   {{/plan.creatorId}}
 
-{{#if plan}}
-Type: {{plan.type}}
-Participants: {{plan.participants}}
+  {{#if plan.date}}
+  <div class="sub-section">
+    <h3 class="subtitle">When</h3>
+    {{moment plan.date format="dddd DD MMMM - HH:mm"}}
+  </div>
+  {{/if}}
 
-Invitees: {{plan.invitees}}
-Confirmed: {{plan.confirmed}}
-
-{{#if plan.date}}
-  <h3>Hour</h3>
-  {{moment plan.date format="dddd DD MMMM - HH:mm"}}
-{{/if}}
-
-<form action="/plans/{{plan._id}}/edit-date" method="post">
-  <div class="form-group">
-    <label for="date">Select date</label>
-    <input type="date" name="date" placeholder="Date" />
+  {{#if plan}}
+  <div class="sub-section">
+    <h4 class="subtitle">Type of plan</h4>
+    <span>{{plan.type}}</span>
   </div>
 
-  <div class="form-group">
-    <label for="time">Time</label>
-    <input type="time" name="time">
+  {{#if plan.invitees}}
+  <h4>Invitees:</h4>
+  <ul>
+    {{#each plan.invitees}}
+    <li>
+      <a href="/auth/profile/{{_id}}">{{username}}</a>
+
+      <form action="/plans/{{../plan._id}}/deleteInvitee/{{_id}}" method="post">
+        <button class="btn btn-primary" type="submit">Remove from list</button>
+      </form>
+    </li>
+    {{/each}}
+  </ul>
+  {{/if}}
+
+  <form class="setDate" action="/plans/{{plan._id}}/edit-date" method="post">
+    <div class="form-group">
+      <label for="date">Select date</label>
+      <input type="date" name="date" placeholder="Date" />
+    </div>
+
+    <div class="form-group">
+      <label for="time">Time</label>
+      <input type="time" name="time">
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">Confirm date</button>
+    </div>
+  </form>
+
+  <h3 class="title">Invite a friend</h3>
+
+  <div class="invitations">
+    <form>
+      <div class="form-group">
+        <label for="search">Search a friend</label>
+        <input id="searchInput" type="text" name="search" placeholder="" />
+      </div>
+    </form>
+
+    <div class="search-results-container">
+      <div id="search-results"></div>
+      <div id="invited-users">
+        <ul></ul>
+        <button class="btn btn-primary" onclick="debouncedSendEmails()">Invite friend(s)</button>
+      </div>
+    </div>
   </div>
 
-  <div class="form-group">
-    <button type="submit">Confirm</button>
-  </div>
-</form>
-
-<br><br><br>
-
-<h3 class="title">Comments ({{plan.comment.length}})</h3>
+  <h3 class="title">Comments ({{plan.comment.length}})</h3>
 
   {{#if plan.comment}}
   <ul>
@@ -46,7 +80,9 @@ Confirmed: {{plan.confirmed}}
     <li>
       <div class="user-info">
         <img class="user-avatar" src="{{authorId.profilePhoto}}" alt="{{authorId.username}} profile picture">
-        <h4>by <a href="/{{authorId._id}}">{{authorId.username}}</a></h4>
+        <h4>by <a href="/{{authorId._id}}">{{authorId.username}}</a>
+          <span class="when">{{moment createdAt fromNow=true}} ago</span>
+        </h4>
       </div>
       <p>{{comment}}</p>
     </li>
@@ -57,15 +93,19 @@ Confirmed: {{plan.confirmed}}
   <p>There are no comments for this entry</p>
   {{/if}}
 
-<form action="/plans/{{plan._id}}/edit" method="post">
-  <div class="form-group">
-    <input type="text" name="comment" placeholder="Your comments" />
-  </div>
-  <div class="form-group">
-    <button type="submit">Add</button>
-  </div>
-</form>
+  <form action="/plans/{{plan._id}}/edit" method="post">
+    <div class="form-group">
+      <input type="text" name="comment" placeholder="Your comment" />
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">Add comment</button>
+    </div>
+  </form>
 
-{{else}}
-<h4>This plan doesn't exist</h4>
-{{/if}}
+  {{else}}
+  <h4>This plan doesn't exist</h4>
+  {{/if}}
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<script src="../javascripts/planHandler.js"></script>
