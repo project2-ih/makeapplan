@@ -16,8 +16,8 @@ function sendEmails() {
     chosenUsers.forEach(user => {
       const planId = window.location.href.split("/").pop();
       // TODO: switch
-      // const reqUsers = `https://makeapplan.herokuapp.com/plans/${planId}/invite/${user.userID}`;
-      const p = axios.post(`http://localhost:3000/plans/${planId}/invite/${user.userID}`);
+      const reqUsers = `https://makeapplan.herokuapp.com/plans/${planId}/invite/${user.userID}`;
+      // const p = axios.post(`http://localhost:3000/plans/${planId}/invite/${user.userID}`);
       promises.push(p);
     });
 
@@ -90,8 +90,8 @@ const debouncedSendEmails = debounce(sendEmails, 1000);
 const debouncedOnSearchInputKeyUp = debounce(onSearchInputKeyUp, 350);
 
 // TODO: switch
-// const reqUsers = `https://makeapplan.herokuapp.com/api/users`;
-const reqUsers = `http://localhost:3000/api/users`;
+const reqUsers = `https://makeapplan.herokuapp.com/api/users`;
+// const reqUsers = `http://localhost:3000/api/users`;
 
 const searchResults = document.getElementById("search-results");
 const invitedUsers = document.getElementById("invited-users");
