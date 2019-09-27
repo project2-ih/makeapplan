@@ -37,7 +37,7 @@ makePlanBtn.addEventListener("click", function(event) {
           <input id="linkForm" type="text" name="linkForm" value="${data.link}">
         </div>
 
-        <button type="submit">Save this Plan!</button>
+        <button type="submit" class="btn-primary">SAVE</button>
     </form>
     `;
     });
