@@ -54,6 +54,7 @@ router.post(
       const salt = bcrypt.genSaltSync(bcryptSalt);
       const hashedPassword = bcrypt.hashSync(password, salt);
       const confirmationCode = crypto.randomBytes(20).toString("hex");
+      // TODO: HOST
       const host = `${process.env.HOST}`;
       
       User.create({
@@ -65,6 +66,7 @@ router.post(
       })
       .then(data => {
         const text = htmlToText.fromString(
+          // TODO: HOST
           template.emailTemplate(confirmationCode, data, host),
           { wordwrap: 130 }
         );

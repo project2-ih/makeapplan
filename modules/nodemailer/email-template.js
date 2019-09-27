@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   emailTemplate: (confirmationCode, data, host) => {
     return `

@@ -10,7 +10,6 @@ const Comment = require("../models/Comment");
 const transporter = require("../modules/nodemailer/nodemailer");
 const template = require("../modules/nodemailer/invitation-email-template");
 const htmlToText = require("html-to-text");
-const crypto = require("crypto");
 
 router.get("/", (req, res, next) => {
   res.render("plans/index");
@@ -97,13 +96,9 @@ router.post("/plans/:id/delete", (req, res) => {
   });
 });
 
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 router.post("/plans/:id/invite/:userId", (req, res, next) => {
-  const { invited } = req.body;
+  // TODO: HOST
   const host = `${process.env.HOST}`
-  const invitatesArray = "";
-  //invitatesArray.toString();
   
   Plan.findById(req.params.id).then(plan => {
     const { invitees } = plan;
@@ -115,16 +110,13 @@ router.post("/plans/:id/invite/:userId", (req, res, next) => {
         { $push: { invitees: req.params.userId } },
         { new: true }
       ).then(updatedPlan => {
-        console.log('llego');
-        console.log(updatedPlan);
-        
-        
-        // console.log(updatedPlan.invitees)
         let eachInvitation = updatedPlan.invitees.filter(invited => invited == req.params.userId)
         return User.findById(eachInvitation[0])
           .then(invitedUser => {
             const text = htmlToText.fromString(
-              template.emailTemplate(invitedUser),
+              // TODO: HOST
+              // TODO: PASS the plan id to the template
+              template.emailTemplate(invitedUser, host),
               { wordwrap: 130 }
             )
             transporter
@@ -138,13 +130,11 @@ router.post("/plans/:id/invite/:userId", (req, res, next) => {
               .then(() => {
                 console.log("Email Sent milf!!!");
                 res.redirect("back");
-              // TODO: Investigate how to redirect from here instead client side
               }).catch(e => {
                 console.error(e);
                 res.send(500);
               });
           }).catch(err => {
-            // res.render("plans", { message: "Something went wrong" });
             console.log(err);
             res.send(500);
 
@@ -159,8 +149,6 @@ router.post("/plans/:id/invite/:userId", (req, res, next) => {
     res.send(500);
   });
 });
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 router.post("/plans/:planId/deleteInvitee/:userId", (req, res) => {
   Plan.findByIdAndUpdate(req.params.planId, {
