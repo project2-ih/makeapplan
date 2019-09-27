@@ -7,12 +7,14 @@ const User = require("../models/User");
 const Plan = require("../models/Plan");
 const Comment = require("../models/Comment");
 
+const checker = require("../middlewares/checker");
+
 const transporter = require("../modules/nodemailer/nodemailer");
 const template = require("../modules/nodemailer/invitation-email-template");
 const htmlToText = require("html-to-text");
 
 router.get("/", (req, res, next) => {
-  res.render("plans/index");
+  res.render("plans/index", { user: req.user });
 });
 
 router.post("/plans", (req, res, next) => {
@@ -45,7 +47,7 @@ router.get("/plans/:id", (req, res) => {
     })
 
     .then(plan => {
-      res.render("plans/detail", { plan, host: process.env.HOST });
+      res.render("plans/detail", { user: req.user, plan, host: process.env.HOST });
     })
     .catch(error => next(error));
 });
@@ -85,7 +87,7 @@ router.post("/plans/:id/edit-date", (req, res) => {
 router.get("/plans", (req, res, next) => {
   Plan.find({ creatorId: req.user._id })
     .then(plans => {
-      res.render("plans/plans", { plans });
+      res.render("plans/plans", { user: req.user, plans });
     })
     .catch(error => next(error));
 });
@@ -97,9 +99,11 @@ router.post("/plans/:id/delete", (req, res) => {
 });
 
 router.post("/plans/:id/invite/:userId", (req, res, next) => {
-  const host = process.env.HEROKU_HOST;
   Plan.findById(req.params.id).then(plan => {
     const { invitees } = plan;
+
+    // TODO: getting planId to pass it to the email template (invitation)
+    const planId = plan._id;
 
     const exists = invitees.includes(req.params.userId);
     if (!exists) {
@@ -112,7 +116,7 @@ router.post("/plans/:id/invite/:userId", (req, res, next) => {
         return User.findById(eachInvitation[0])
           .then(invitedUser => {
             const text = htmlToText.fromString(
-              template.emailTemplate(invitedUser, host),
+              template.emailTemplate(invitedUser, planId),
               { wordwrap: 130 }
             )
             transporter
@@ -121,10 +125,9 @@ router.post("/plans/:id/invite/:userId", (req, res, next) => {
                 to: invitedUser.email,
                 subject: "You have an invitation",
                 text: text,
-                html: template.emailTemplate(invitedUser)
+                html: template.emailTemplate(invitedUser, planId)
               })
               .then(() => {
-                console.log("Email Sent milf!!!");
                 res.redirect("back");
               }).catch(e => {
                 console.error(e);
@@ -133,7 +136,6 @@ router.post("/plans/:id/invite/:userId", (req, res, next) => {
           }).catch(err => {
             console.log(err);
             res.send(500);
-
           });
       });
     } else {
@@ -154,6 +156,5 @@ router.post("/plans/:planId/deleteInvitee/:userId", (req, res) => {
     res.redirect("back");
   })
 });
-
 
 module.exports = router;
