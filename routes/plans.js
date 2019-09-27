@@ -98,8 +98,7 @@ router.post("/plans/:id/delete", (req, res) => {
 
 router.post("/plans/:id/invite/:userId", (req, res, next) => {
   // TODO: HOST
-  const host = `${process.env.HOST}`
-  
+  const host = process.env.HEROKU_HOST
   Plan.findById(req.params.id).then(plan => {
     const { invitees } = plan;
 

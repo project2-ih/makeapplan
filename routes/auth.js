@@ -55,8 +55,9 @@ router.post(
       const hashedPassword = bcrypt.hashSync(password, salt);
       const confirmationCode = crypto.randomBytes(20).toString("hex");
       // TODO: HOST
-      const host = `${process.env.HOST}`;
-      
+      const host = process.env.HEROKU_HOST;
+      console.log(host)
+
       User.create({
         username,
         password: hashedPassword,
