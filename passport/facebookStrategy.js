@@ -12,7 +12,7 @@ passport.use(
     {
       clientID: `${process.env.FACEBOOK_APP_ID}`,
       clientSecret: `${process.env.FACEBOOK_APP_SECRET}`,
-      callbackURL: "/auth/facebook/callback",
+      callbackURL: "https://makeapplan.herokuapp.com/auth/facebook/callback",
       profileFields: ["id", "displayName", "photos", "emails"]
     },
 
