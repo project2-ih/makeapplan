@@ -207,6 +207,10 @@ textarea:focus {
     padding: 48px 24px; }
   .activity-type {
     width: 50%;
-    text-align: left; } }
+    text-align: left; }
+  .form-group {
+    display: block;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #f0f0f0; } }
 
 /*# sourceMappingURL=style.css.map */

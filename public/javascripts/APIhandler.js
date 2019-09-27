@@ -1,4 +1,4 @@
-const boredApiUrl = "http://www.boredapi.com/api/activity";
+const boredApiUrl = "https://www.boredapi.com/api/activity";
 
 const myPlan = document.getElementById("myPlan");
 

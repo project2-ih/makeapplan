@@ -7,7 +7,7 @@ const totalElementsToCheck = 50;
 let totalDownloaded = 0;
 let downloadedEvents = [];
 let intervalID = setInterval(() => {
-  axios.get("http://www.boredapi.com/api/activity?type=cooking").then(results => {
+  axios.get("https://www.boredapi.com/api/activity?type=cooking").then(results => {
     results = results.data;
     const output = {
       t: results.type,
