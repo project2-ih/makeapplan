@@ -72,11 +72,15 @@ router.post("/plans/:id/edit-date", (req, res) => {
   const time = req.body.time;
   const planDate = new Date(`${date} ${time}`).toLocaleString();
 
+  if(date === "" || time === "") {
+    res.redirect("back");
+  }
+
   Plan.findByIdAndUpdate(req.params.id, { date: planDate }, { new: true })
     .then(() => {
       res.redirect("back");
     })
-    .catch(error => next(error));
+    .catch(error => res.send(500));
 });
 
 router.get("/plans", (req, res, next) => {
@@ -97,47 +101,62 @@ router.post("/plans/:id/delete", (req, res) => {
 
 router.post("/plans/:id/invite/:userId", (req, res, next) => {
   const { invited } = req.body;
-
- 
-  
   const host = `${process.env.HOST}`
   const invitatesArray = "";
   //invitatesArray.toString();
-
-  Plan.findByIdAndUpdate(
-    req.params.id,
-    { $push: { invitees: req.params.userId } },
-    { new: true }
-  ).then(updatedPlan => {
-    // console.log(updatedPlan.invitees)
-    let eachInvitation = updatedPlan.invitees.filter(invited => invited == req.params.userId)
-    User.findById(eachInvitation[0])
-    .then(invitedUser => {
-      const text = htmlToText.fromString(
-        template.emailTemplate(invitedUser),
-        { wordwrap: 130 }
-      )
-      transporter
-      .sendMail({
-        from: `Makeapplan | An invitation for you!`,
-        to: invitedUser.email,
-        subject: "You have an invitation",
-        text: text,
-        html: template.emailTemplate(invitedUser)
-      })
-      .then(() => {
-        console.log("Email Sent mf!!!");
-      })
-
-      
-    })
-    
   
+  Plan.findById(req.params.id).then(plan => {
+    const { invitees } = plan;
 
-      .catch(err => {
-        // res.render("plans", { message: "Something went wrong" });
-        console.log(err)
+    const exists = invitees.includes(req.params.userId);
+    if (!exists) {
+      return Plan.findByIdAndUpdate(
+        req.params.id,
+        { $push: { invitees: req.params.userId } },
+        { new: true }
+      ).then(updatedPlan => {
+        console.log('llego');
+        console.log(updatedPlan);
+        
+        
+        // console.log(updatedPlan.invitees)
+        let eachInvitation = updatedPlan.invitees.filter(invited => invited == req.params.userId)
+        return User.findById(eachInvitation[0])
+          .then(invitedUser => {
+            const text = htmlToText.fromString(
+              template.emailTemplate(invitedUser),
+              { wordwrap: 130 }
+            )
+            transporter
+              .sendMail({
+                from: `Makeapplan | An invitation for you!`,
+                to: invitedUser.email,
+                subject: "You have an invitation",
+                text: text,
+                html: template.emailTemplate(invitedUser)
+              })
+              .then(() => {
+                console.log("Email Sent milf!!!");
+                res.redirect("back");
+              // TODO: Investigate how to redirect from here instead client side
+              }).catch(e => {
+                console.error(e);
+                res.send(500);
+              });
+          }).catch(err => {
+            // res.render("plans", { message: "Something went wrong" });
+            console.log(err);
+            res.send(500);
+
+          });
       });
+    } else {
+      res.redirect("back");
+    }
+    
+  }).catch(e => {
+    console.log(e)
+    res.send(500);
   });
 });
 

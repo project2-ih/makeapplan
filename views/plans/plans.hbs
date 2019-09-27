@@ -1,16 +1,20 @@
-<h1>My plans ({{plans.length}})</h1>
+<div class="container">
+  <h1 class="title">My plans ({{plans.length}})</h1>
 
-{{#if plans}}
-<ul>
-  {{#each plans}}
-  <li><a href="/plans/{{_id}}">{{activity}}</a></li>
+  {{#if plans}}
+  <ul>
+    {{#each plans}}
+    <div class="sub-section">
+      <li><a href="/plans/{{_id}}">{{activity}}</a></li>
 
-  <form action="/plans/{{_id}}/delete" method="post">
-    <button type="submit">Delete</button>
-  </form>
-  {{/each}}
-</ul>
+      <form action="/plans/{{_id}}/delete" method="post">
+        <button class="btn btn-primary" type="submit">Delete</button>
+      </form>
+    </div>
+    {{/each}}
+  </ul>
 
   {{else}}
   <h4>You don't have plans yet</h4>
-{{/if}}
+  {{/if}}
+</div>

@@ -1,25 +1,34 @@
+<div class="container">
+  <h2 class="title">Login</h2>
 
-<h2>Login</h2>
+  <form class="form" action="/auth/login" method="POST" id="form-container">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input id="username" type="text" name="username" placeholder="JonSnow">
+    </div>
 
-<form action="/auth/login" method="POST" id="form-container">
-  <label for="username">Username</label>
-  <input id="username" type="text" name="username" placeholder="JonSnow">
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" placeholder="Your password">
+    </div>
 
-  <br><br>
-
-  <label for="password">Password</label>
-  <input id="password" type="password" name="password" placeholder="Your password">
-  <br>
-  {{#if message }}
+    {{#if message }}
     <div class="error-message">{{ message }}</div>
-  {{/if}}
+    {{/if}}
 
-  <br><br>
+    <button class="btn btn-primary">Login</button>
 
-  <button>Login</button>
+    <p class="account-message">
+      Don't have an account yet?
+      <a href="/auth/signup">Signup</a>
+    </p>
+  </form>
 
-  <p class="account-message">
-    Don't have an account yet?
-    <a href="/auth/signup">Signup</a>
+  <p>
+    <a class="btn btn-secondary" href="/auth/google">Login With Google</a>
   </p>
-</form>
+
+  <p>
+    <a class="btn btn-secondary" href="/auth/facebook">Login with Facebook</a>
+  </p>
+</div>

@@ -21,11 +21,11 @@ const planSchema = new Schema(
       ]
     },
     link: String,
-    // accessibility: Number,
     participants: Number,
-    // price: Number,
     comment: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
-    invitees: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    invitees: [{ 
+      type: Schema.Types.ObjectId, ref: "User",
+    }],
     confirmed: [{ type: Schema.Types.ObjectId, ref: "User" }]
   },
   {
