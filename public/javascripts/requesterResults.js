@@ -11,13 +11,49 @@ const participantsAvailable = [
 ];
 
 const accessibilityAvailable = [
-  { type: "social", accessibility: [0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.32, 0.35, 0.4, 0.7, 0.8, 0.9] },
+  {
+    type: "social",
+    accessibility: [
+      0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.3,
+      0.32,
+      0.35,
+      0.4,
+      0.7,
+      0.8,
+      0.9
+    ]
+  },
   { type: "education", accessibility: [0.05, 0.1, 0.2, 0.25, 0.7, 0.8, 0.9] },
-  { type: "recreational", accessibility: [0, 0.07, 0.08, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.5, 0.9, 1] },
+  {
+    type: "recreational",
+    accessibility: [
+      0,
+      0.07,
+      0.08,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.5,
+      0.9,
+      1
+    ]
+  },
   { type: "diy", accessibility: [0.1, 0.15, 0.2, 0.3, 0.6] },
   { type: "charity", accessibility: [0.05, 0.1, 0.35, 0.5] },
   { type: "cooking", accessibility: [0.05, 0.2, 0.3, 0.8] },
-  { type: "relaxation", accessibility: [0, 0.05, 0.08, 0.1, 0.12, 0.15, 0.2, 0.3, 0.5] },
+  {
+    type: "relaxation",
+    accessibility: [0, 0.05, 0.08, 0.1, 0.12, 0.15, 0.2, 0.3, 0.5]
+  },
   { type: "music", accessibility: [0, 0.2, 0.3, 0.4, 0.6, 0.8, 0.9] },
   { type: "busywork", accessibility: [0, 0.02, 0.1, 0.15] }
 ];
@@ -35,24 +71,29 @@ const pricesAvailable = [
 ];
 
 function applyChangeToDropdown(type) {
-
-  let availablesOfChosenParticipants = participantsAvailable.filter(x => x.type === type)[0].participants;
-  let availablesOfChosenAccesibility = accessibilityAvailable.filter(x => x.type === type)[0].accessibility;
-  let availablesOfChosenPrices = pricesAvailable.filter(x => x.type === type)[0].price;
+  let availablesOfChosenParticipants = participantsAvailable.filter(
+    x => x.type === type
+  )[0].participants;
+  let availablesOfChosenAccesibility = accessibilityAvailable.filter(
+    x => x.type === type
+  )[0].accessibility;
+  let availablesOfChosenPrices = pricesAvailable.filter(x => x.type === type)[0]
+    .price;
 
   // Participants
-  document.querySelectorAll(".participantsAvailable option")
+  document
+    .querySelectorAll(".participantsAvailable option")
     .forEach(x => x.removeAttribute("disabled", "disabled"));
 
-  document.querySelectorAll(".participantsAvailable option")
-    .forEach(x => {
+  document.querySelectorAll(".participantsAvailable option").forEach(x => {
     if (availablesOfChosenParticipants.indexOf(+x.value) === -1) {
       x.setAttribute("disabled", "disabled");
     }
   });
 
   // Accesibility
-  document.querySelectorAll(".accessibilityAvailable option")
+  document
+    .querySelectorAll(".accessibilityAvailable option")
     .forEach(x => x.removeAttribute("disabled", "disabled"));
 
   document.querySelectorAll(".accessibilityAvailable option")
@@ -63,11 +104,11 @@ function applyChangeToDropdown(type) {
   });
 
   // Prices
-  document.querySelectorAll(".pricesAvailable option")
+  document
+    .querySelectorAll(".pricesAvailable option")
     .forEach(x => x.removeAttribute("disabled", "disabled"));
 
-  document.querySelectorAll(".pricesAvailable option")
-    .forEach(x => {
+  document.querySelectorAll(".pricesAvailable option").forEach(x => {
     if (availablesOfChosenPrices.indexOf(+x.value) === -1) {
       x.setAttribute("disabled", "disabled");
     }

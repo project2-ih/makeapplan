@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container auth">
   <h2 class="title">Signup</h2>
 
   <form class="form" action="/auth/signup" method="POST" id="form-container" enctype="multipart/form-data">
@@ -35,11 +35,19 @@
     <a href="/auth/login">Login</a>
   </p>
 
-  <p class="account-message">
-    <a class="btn btn-secondary" href="/auth/google">Login with Google</a>
-  </p>
-
-  <p class="account-message">
-    <a class="btn btn-secondary" href="/auth/facebook">Login with Facebook</a>
-  </p>
+  <ul class="social-auth">
+    <li><a class="btn btn-social google" href="/auth/google">
+        <svg viewBox="0 0 24 24">
+          <path fill="#FFF" fill-rule="evenodd"
+            d="M12.1687 9.6238v4.7524s4.6752-.0061 6.5788-.0061c-1.0308 3.0809-2.6337 4.7586-6.5788 4.7586-3.9924 0-7.1085-3.1916-7.1085-7.1287 0-3.937 3.116-7.1287 7.1085-7.1287 2.1108 0 3.474.7316 4.7246 1.7514 1.001-.9871.9173-1.1278 3.464-3.4994C18.1954 1.183 15.3222 0 12.1687 0 5.448 0 0 5.3726 0 12c0 6.6273 5.448 12 12.1687 12 10.0454 0 12.5007-8.6257 11.6868-14.3762H12.1687z" />
+        </svg>
+        Continue with Google
+      </a></li>
+    <li><a class="btn btn-social facebook" href="/auth/facebook">
+        <svg viewBox="0 0 24 24">
+          <path fill="#FFF" fill-rule="evenodd"
+            d="M12.8192 24H1.3246C.5928 24 0 23.4068 0 22.6753V1.3246C0 .593.593 0 1.3246 0h21.3509C23.407 0 24 .593 24 1.3246v21.3507C24 23.4069 23.4069 24 22.6755 24h-6.1158v-9.2941h3.1196l.467-3.6221h-3.5866V8.7713c0-1.0487.2912-1.7633 1.795-1.7633l1.918-.0008V3.7675c-.3318-.0441-1.4703-.1427-2.795-.1427-2.7653 0-4.6585 1.688-4.6585 4.7878v2.6712H9.6916v3.622h3.1276V24z" />
+        </svg>
+        Continue with Facebook</a></li>
+  </ul>
 </div>

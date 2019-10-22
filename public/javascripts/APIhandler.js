@@ -17,8 +17,16 @@ makePlanBtn.addEventListener("click", function(event) {
       `${boredApiUrl}/?type=${typeQ}&minaccessibility=0&maxaccessibility=${accessibility}`
     )
     .then(({ data }) => {
+      const isLink = data.link ? (
+        `<div class="form-group">
+          <label for="linkForm">Link</label>
+          <input id="linkForm" type="text" name="linkForm" value="${data.link}">
+        </div>`
+      ) : '';
+
       myPlan.innerHTML = ``;
       myPlan.innerHTML += `
+      <h2 class="title">Your plan!</h2>
       <form action="/plans" method="post">
         <div class="form-group">
           <label for="activityForm">Activity</label>
@@ -30,10 +38,7 @@ makePlanBtn.addEventListener("click", function(event) {
           <input id="typeForm" type="text" name="typeForm" value="${data.type}">
         </div>
 
-        <div class="form-group">
-          <label for="linkForm">Link</label>
-          <input id="linkForm" type="text" name="linkForm" value="${data.link}">
-        </div>
+        ${isLink}
 
         <button class="btn btn-primary" type="submit">Save this Plan!</button>
     </form>

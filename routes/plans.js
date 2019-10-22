@@ -8,24 +8,28 @@ const Plan = require("../models/Plan");
 const Comment = require("../models/Comment");
 
 const checker = require("../middlewares/checker");
+const crypto = require("crypto");
 
 const transporter = require("../modules/nodemailer/nodemailer");
 const template = require("../modules/nodemailer/invitation-email-template");
 const htmlToText = require("html-to-text");
 
-router.get("/", (req, res, next) => {
+router.get("/", checker.checkLogin, (req, res, next) => {
   res.render("plans/index", { user: req.user });
 });
 
 router.post("/plans", (req, res, next) => {
   const { activityForm, typeForm, participantsForm, linkForm } = req.body;
 
+  const confirmationCode = crypto.randomBytes(20).toString("hex");
+
   Plan.create({
     creatorId: req.user._id,
     activity: activityForm,
     type: typeForm,
     participants: participantsForm,
-    link: linkForm
+    link: linkForm,
+    confirmationCode
   })
     .then(createdPlan => {
       res.redirect(`/plans/${createdPlan._id}`);
@@ -84,7 +88,7 @@ router.post("/plans/:id/edit-date", (req, res) => {
     .catch(error => res.send(500));
 });
 
-router.get("/plans", (req, res, next) => {
+router.get("/plans", checker.checkLogin, (req, res, next) => {
   Plan.find({ creatorId: req.user._id })
     .then(plans => {
       res.render("plans/plans", { user: req.user, plans });
@@ -101,9 +105,8 @@ router.post("/plans/:id/delete", (req, res) => {
 router.post("/plans/:id/invite/:userId", (req, res, next) => {
   Plan.findById(req.params.id).then(plan => {
     const { invitees } = plan;
-
-    // TODO: getting planId to pass it to the email template (invitation)
     const planId = plan._id;
+    const confirmationCode = plan.confirmationCode;
 
     const exists = invitees.includes(req.params.userId);
     if (!exists) {
@@ -116,7 +119,7 @@ router.post("/plans/:id/invite/:userId", (req, res, next) => {
         return User.findById(eachInvitation[0])
           .then(invitedUser => {
             const text = htmlToText.fromString(
-              template.emailTemplate(invitedUser, planId),
+              template.emailTemplate(invitedUser, planId, confirmationCode),
               { wordwrap: 130 }
             )
             transporter
@@ -125,17 +128,17 @@ router.post("/plans/:id/invite/:userId", (req, res, next) => {
                 to: invitedUser.email,
                 subject: "You have an invitation",
                 text: text,
-                html: template.emailTemplate(invitedUser, planId)
+                html: template.emailTemplate(invitedUser, planId, confirmationCode)
               })
               .then(() => {
                 res.redirect("back");
               }).catch(e => {
                 console.error(e);
-                res.send(500);
+                res.sendStatus(500);
               });
           }).catch(err => {
             console.log(err);
-            res.send(500);
+            res.sendStatus(500);
           });
       });
     } else {
@@ -146,6 +149,19 @@ router.post("/plans/:id/invite/:userId", (req, res, next) => {
     console.log(e)
     res.send(500);
   });
+});
+
+router.get("/plans/invitation/:confirmationCode", (req, res) => {
+  const confirmationCode = req.params.confirmationCode;
+
+  Plan.findOne({ confirmationCode: confirmationCode })
+    .then(plan => { 
+      res.redirect(`/plans/${plan._id}`);
+    })
+    .catch(error => {
+      console.log(error);
+      res.redirect("/");
+    });
 });
 
 router.post("/plans/:planId/deleteInvitee/:userId", (req, res) => {

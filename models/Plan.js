@@ -26,6 +26,10 @@ const planSchema = new Schema(
     invitees: [{ 
       type: Schema.Types.ObjectId, ref: "User",
     }],
+    confirmationCode: {
+      type: String,
+      unique: true
+    },
     confirmed: [{ type: Schema.Types.ObjectId, ref: "User" }]
   },
   {
