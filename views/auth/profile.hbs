@@ -1,12 +1,14 @@
-<div class="container">
-  <h1 class="title">My profile</h1>
+<div class="container animated fadeIn fast">
 
   {{#if user}}
 
-  <div class="user-info">
-    <img class="user-avatar" src="{{user.profilePhoto}}" alt="{{user.username}} profile picture">
-    <h4>{{user.username}}</h4>
-  </div>
+  <section>
+    <h1 class="title">My profile</h1>
+
+    <div class="user-info">
+      <img class="user-avatar" id="bigger" src="{{user.profilePhoto}}" alt="{{user.username}} profile picture">
+      <h4>{{user.username}}</h4>
+    </div>
 
     <div class="sub-section">
       <h4 class="subtitle">Status</h4>
@@ -18,13 +20,14 @@
       <h4 class="subtitle">Email</h4>
       <span>{{user.email}}</span>
     </div>
-    
+
     {{/if}}
 
     <div class="sub-section">
       <h4 class="subtitle">Account created</h4>
       <span>{{moment user.createdAt format="DD MMMM YYYY"}}</span>
     </div>
-  
+  </section>
+
   {{/if}}
 </div>

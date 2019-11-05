@@ -16,7 +16,8 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: 1.46667;
-  color: #444; }
+  color: #444;
+  background: #ebebeb45; }
 
 a {
   color: #0057ff;
@@ -35,8 +36,8 @@ p {
   text-transform: uppercase; }
 
 .title {
-  font-size: 1.4rem;
-  padding: 1rem 0;
+  font-size: 1.2rem;
+  padding: 0.5rem 0;
   margin-bottom: 2rem;
   border-bottom: 1px solid #d4d4d4; }
 
@@ -146,7 +147,7 @@ textarea:focus {
   text-transform: uppercase;
   text-decoration: none;
   letter-spacing: 0.1rem;
-  padding: 0.75rem;
+  padding: 0.5rem;
   margin: 1rem 0;
   border: 1px solid transparent;
   border-radius: 0.25rem;
@@ -162,7 +163,7 @@ textarea:focus {
 
 .btn-social {
   display: flex;
-  font-size: 9px;
+  font-size: 8px;
   line-height: 16px;
   padding: 8px; }
 
@@ -171,7 +172,15 @@ textarea:focus {
   flex-direction: row; }
 
 .container.auth {
-  max-width: 740px; }
+  max-width: 560px;
+  background: rgba(255, 255, 255, 0.8); }
+  .container.auth .form-group {
+    flex-direction: column; }
+  .container.auth .form label {
+    font-size: 1rem;
+    margin-bottom: 1rem; }
+  .container.auth .social-auth li {
+    width: 50%; }
 
 .social-auth li:not(:first-child) {
   margin-left: 8px; }
@@ -218,6 +227,10 @@ textarea:focus {
   border-radius: 50%;
   margin-right: 0.5rem; }
 
+#bigger {
+  width: 64px;
+  height: 64px; }
+
 .post-image img {
   width: 100%;
   margin-bottom: 1.6rem; }
@@ -246,7 +259,9 @@ textarea:focus {
   align-items: center; }
 
 .sub-section a {
-  margin-right: 16px; }
+  margin-right: 16px;
+  text-decoration: none;
+  color: inherit; }
 
 .activity-type input[type="radio"] {
   visibility: hidden;
@@ -257,6 +272,8 @@ textarea:focus {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
   padding: 5px 10px;
   border-radius: 3px;
@@ -268,6 +285,40 @@ textarea:focus {
 
 .activity-type img {
   width: 62px; }
+
+section {
+  border: 1px solid transparent;
+  padding: 3rem;
+  border-radius: 6px;
+  margin: 2rem 0;
+  background: white;
+  box-shadow: 5px 5px 25px 0px rgba(147, 147, 147, 0.2);
+  transition: border-color 0.5s; }
+
+section:hover {
+  border-color: rgba(0, 0, 0, 0.075); }
+
+/* ANIMATIONS */
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both; }
+
+.fast {
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both; }
+
+.fadeIn {
+  animation-name: fadeIn; }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
 
 @media screen and (max-width: 800px) {
   .container {
@@ -285,6 +336,8 @@ textarea:focus {
   .form-group {
     display: block;
     padding: 1.5rem 0;
-    border-bottom: 1px solid #f0f0f0; } }
+    border-bottom: 1px solid #f0f0f0; }
+  #activities-group {
+    display: flex !important; } }
 
 /*# sourceMappingURL=style.css.map */
